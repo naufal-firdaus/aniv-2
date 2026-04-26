@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =============================================
+   DEFAULT THEME — Classic (Cream + Burgundy + Gold)
+   ============================================= */
+:root {
+    /* Space-separated RGB values untuk Tailwind opacity modifiers */
+    --color-cream-50: 253 251 247;
+    --color-cream-100: 250 246 241;
+    --color-cream-200: 242 234 217;
+    --color-cream-300: 232 217 191;
+
+    --color-burgundy-400: 156 87 96;
+    --color-burgundy-600: 114 47 55;
+    --color-burgundy-800: 74 27 34;
+    --color-burgundy-900: 46 15 20;
+
+    --color-gold-400: 212 184 122;
+    --color-gold-500: 201 169 97;
+    --color-gold-600: 168 138 69;
+
+    --color-rose-200: 232 196 192;
+    --color-rose-400: 200 138 136;
+
+    /* Direct-use CSS variables (body, ornament, dll) */
+    --cream: rgb(var(--color-cream-100));
+    --burgundy: rgb(var(--color-burgundy-600));
+    --gold: rgb(var(--color-gold-500));
+}
+
+/* =============================================
+   VALENTINE THEME — Pink + Red + Rose
+   ============================================= */
+[data-theme="valentine"] {
+    --color-cream-50: 255 245 247;
+    --color-cream-100: 255 228 238;
+    --color-cream-200: 255 200 218;
+    --color-cream-300: 255 176 203;
+
+    --color-burgundy-400: 224 90 122;
+    --color-burgundy-600: 192 32 80;
+    --color-burgundy-800: 139 15 53;
+    --color-burgundy-900: 92 8 32;
+
+    --color-gold-400: 255 158 175;
+    --color-gold-500: 255 112 149;
+    --color-gold-600: 224 72 120;
+
+    --color-rose-200: 255 208 224;
+    --color-rose-400: 255 144 176;
+
+    --cream: rgb(var(--color-cream-100));
+    --burgundy: rgb(var(--color-burgundy-600));
+    --gold: rgb(var(--color-gold-500));
+}
+
+/* =============================================
+   ANNIVERSARY THEME — Lavender + Purple + Gold
+   ============================================= */
+[data-theme="anniversary"] {
+    --color-cream-50: 247 243 255;
+    --color-cream-100: 237 228 255;
+    --color-cream-200: 220 207 245;
+    --color-cream-300: 200 180 232;
+
+    --color-burgundy-400: 155 108 200;
+    --color-burgundy-600: 123 79 175;
+    --color-burgundy-800: 82 48 122;
+    --color-burgundy-900: 53 26 85;
+
+    --color-gold-400: 212 184 122;
+    --color-gold-500: 201 169 97;
+    --color-gold-600: 168 138 69;
+
+    --color-rose-200: 216 200 240;
+    --color-rose-400: 180 144 208;
+
+    --cream: rgb(var(--color-cream-100));
+    --burgundy: rgb(var(--color-burgundy-600));
+    --gold: rgb(var(--color-gold-500));
+}
+
+/* =============================================
+   GLOBAL STYLES
+   ============================================= */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--cream);
+    color: var(--burgundy);
+    font-feature-settings: "liga", "kern";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition:
+        background-color 0.4s ease,
+        color 0.4s ease;
+}
+
+/* Subtle paper texture */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: radial-gradient(
+        rgb(var(--color-burgundy-600) / 0.025) 1px,
+        transparent 1px
+    );
+    background-size: 24px 24px;
+    opacity: 0.6;
+}
+
+/* Vintage drop cap */
+.drop-cap::first-letter {
+    font-family: var(--font-italiana), serif;
+    font-size: 4.5rem;
+    float: left;
+    line-height: 0.85;
+    margin: 0.4rem 0.6rem 0 0;
+    color: var(--burgundy);
+}
+
+/* Ornamental divider */
+.ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--gold);
+}
+
+.ornament::before,
+.ornament::after {
+    content: "";
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Selection style */
+::selection {
+    background: var(--burgundy);
+    color: var(--cream);
+}
+
+/* Gallery image hover shimmer */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-item img {
+    transition:
+        transform 0.8s ease,
+        filter 0.6s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.05) saturate(1.1);
+}
+
+.gallery-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 60%,
+        rgb(var(--color-burgundy-900) / 0.7)
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.gallery-item .caption {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    color: var(--cream);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+    z-index: 2;
+    font-style: italic;
+}
+
+.gallery-item:hover .caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Letter envelope flourish */
+.envelope-line {
+    position: relative;
+}
+
+.envelope-line::before,
+.envelope-line::after {
+    content: "❦";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gold);
+    font-size: 0.875rem;
+}
+
+.envelope-line::before {
+    left: -2rem;
+}
+.envelope-line::after {
+    right: -2rem;
+}
